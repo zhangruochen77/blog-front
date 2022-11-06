@@ -2,253 +2,52 @@
     <div>
         <div class="article-header-class">
             <p class="article-total-class">100 articles waiting for you</p>
-            <p class="article-view-class">total: 9999 today: 666</p>
-            <img src="../assets/article/electronics.jpg">
+            <p class="article-view-class">total: {{admin.totalView}} today: {{admin.todayView}}</p>
+            <img src="../assets/article/fire.jpg">
         </div>
         <div class="article-body-class">
 
             <div class="article-box-body-class">
-                <div class="article-box-class">
+                <div class="article-box-class" v-for="item in pageArticles.articles">
                     <div>
                         <div class="article-img-class">
-                            <img src="../assets/article/trend.jpg">
+                            <img :src="item.img">
                         </div>
                         <div class="article-info-class">
                             <div class="article-tag-class">
                                 <div>
                                     <p>
-                                        spring boot
+                                        {{item.tagValue}}
                                     </p>
                                 </div>
                             </div>
-                            <div class="article-title-class">
+                            <div class="article-title-class" @click="showArticle(item.id)">
                                 <div>
-                                    <h3>多线程</h3>
+                                    <h3>{{item.title}}</h3>
                                 </div>
                                 <div class="article-des-class">
                                     <p>
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
+                                        {{item.description}}
                                     </p>
                                 </div>
                             </div>
                             <div class="article-footer-class">
                                 <p>
-                                    2022 年 11 月 5 日 9 点 23 分
+                                    {{item.createTime}}
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="article-box-class">
-                    <div>
-                        <div class="article-img-class">
-                            <img src="../assets/article/trend.jpg">
-                        </div>
-                        <div class="article-info-class">
-                            <div class="article-tag-class">
-                                <div>
-                                    <p>
-                                        java
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="article-title-class">
-                                <div>
-                                    <h3>多线程</h3>
-                                </div>
-                                <div class="article-des-class">
-                                    <p>
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="article-footer-class">
-                                <p>
-                                    2022 年 11 月 5 日 9 点 23 分
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="article-box-class">
-                    <div>
-                        <div class="article-img-class">
-                            <img src="../assets/article/trend.jpg">
-                        </div>
-                        <div class="article-info-class">
-                            <div class="article-tag-class">
-                                <div>
-                                    <p>
-                                        java
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="article-title-class">
-                                <div>
-                                    <h3>多线程</h3>
-                                </div>
-                                <div class="article-des-class">
-                                    <p>
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="article-footer-class">
-                                <p>
-                                    2022 年 11 月 5 日 9 点 23 分
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="article-box-class">
-                    <div>
-                        <div class="article-img-class">
-                            <img src="../assets/article/trend.jpg">
-                        </div>
-                        <div class="article-info-class">
-                            <div class="article-tag-class">
-                                <div>
-                                    <p>
-                                        java
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="article-title-class">
-                                <div>
-                                    <h3>多线程</h3>
-                                </div>
-                                <div class="article-des-class">
-                                    <p>
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="article-footer-class">
-                                <p>
-                                    2022 年 11 月 5 日 9 点 23 分
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="article-box-class">
-                    <div>
-                        <div class="article-img-class">
-                            <img src="../assets/article/trend.jpg">
-                        </div>
-                        <div class="article-info-class">
-                            <div class="article-tag-class">
-                                <div>
-                                    <p>
-                                        java
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="article-title-class">
-                                <div>
-                                    <h3>多线程</h3>
-                                </div>
-                                <div class="article-des-class">
-                                    <p>
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="article-footer-class">
-                                <p>
-                                    2022 年 11 月 5 日 9 点 23 分
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="article-box-class">
-                    <div>
-                        <div class="article-img-class">
-                            <img src="../assets/article/trend.jpg">
-                        </div>
-                        <div class="article-info-class">
-                            <div class="article-tag-class">
-                                <div>
-                                    <p>
-                                        java
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="article-title-class">
-                                <div>
-                                    <h3>多线程</h3>
-                                </div>
-                                <div class="article-des-class">
-                                    <p>
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="article-footer-class">
-                                <p>
-                                    2022 年 11 月 5 日 9 点 23 分
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="article-box-class">
-                    <div>
-                        <div class="article-img-class">
-                            <img src="../assets/article/trend.jpg">
-                        </div>
-                        <div class="article-info-class">
-                            <div class="article-tag-class">
-                                <div>
-                                    <p>
-                                        java
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="article-title-class">
-                                <div>
-                                    <h3>多线程</h3>
-                                </div>
-                                <div class="article-des-class">
-                                    <p>
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                        一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="article-footer-class">
-                                <p>
-                                    2022 年 11 月 5 日 9 点 23 分
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="article-page-class">
-
+                <div class="block">
+                    <el-pagination
+                            layout="prev, pager, next"
+                            :total="pageArticles.total">
+                    </el-pagination>
+                </div>
             </div>
         </div>
 
@@ -256,8 +55,60 @@
 </template>
 
 <script>
+    import AdminApi from "@/api/AdminApi"
+    import ArticleApi from "@/api/ArticleApi"
+
     export default {
-        name: "Article"
+        name: "Article",
+        data() {
+            return {
+                admin: {
+                    id: '1',
+                    username: 'ruoChen',
+                    name: '张若尘',
+                    description: '目前是一名大三在读的 java 学习者,很高兴你能来参观我的博客,如果你对我的博客内容有感兴趣的地方和意见都可以通过邮箱或者是评论与我联系',
+                    email: '924945268@qq.com',
+                    birth: '2002-03-15',
+                    todayView: 0,
+                    totalView: 0
+                },
+                pageArticles: {
+                    articles: [], /* 文章列表 */
+                    total: 0
+                }
+            }
+        },
+        created() {
+            this.getInfo()
+            this.pageListArticles(1, null)
+        },
+        methods: {
+            /* 展示文章信息 */
+            showArticle(id) {
+                let path = '/articleDetail/' + id
+                this.$router.push(path)
+            },
+            /* 分页获取文章列表信息 */
+            pageListArticles(page = 1, tagId) {
+                ArticleApi.pageListArticles(page, 9, tagId).then(resp => {
+                    this.pageArticles.articles = resp.data.records
+                    this.pageArticles.total = resp.data.total
+                    console.log(resp.data.total)
+                })
+            },
+            /* 获取用户信息 */
+            getInfo() {
+                let adminStr = window.sessionStorage.getItem('admin')
+                if (adminStr !== null && adminStr.length > 0) {
+                    this.admin = JSON.parse(adminStr)
+                } else {
+                    AdminApi.getInfo().then(resp => {
+                        this.admin = resp.data
+                        window.sessionStorage.setItem("admin", JSON.stringify(resp.data))
+                    })
+                }
+            }
+        }
     }
 </script>
 
@@ -436,6 +287,7 @@
     }
 
     .article-page-class {
+        margin-top: 15px;
         height: 40px;
         width: 100%;
     }

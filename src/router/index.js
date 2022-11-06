@@ -6,6 +6,7 @@ import About from "@/components/About"
 import Comment from "@/components/Comment"
 import Life from "@/components/Life"
 import Article from "@/components/Article"
+import ArticleDetail from "@/components/ArticleDetail";
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,12 @@ const routes = [
                 path: 'life',
                 name: 'life',
                 component: Life
+            },
+            {
+                /* 文章详情界面 */
+                path: 'articleDetail/:id',
+                name: 'articleDetail',
+                component: ArticleDetail
             }
         ]
     }

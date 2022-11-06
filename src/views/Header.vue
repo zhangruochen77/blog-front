@@ -11,11 +11,11 @@
             <div class="nav-comment-class" @click="updatePath('/comment')" title="comment">
                 <img src="../assets/header/comment_icon.png" alt="评论">
             </div>
-<!--            <div>-->
-<!--                <audio autoplay controls loop>-->
-<!--                    <source src="../assets/music/space-x.mp3" type='audio/ogg'>-->
-<!--                </audio>-->
-<!--            </div>-->
+            <!--            <div>-->
+            <!--                <audio autoplay controls loop>-->
+            <!--                    <source src="../assets/music/space-x.mp3" type='audio/ogg'>-->
+            <!--                </audio>-->
+            <!--            </div>-->
             <div title="github">
                 <a href="https://github.com/zhangruochen77" class="github-corner" aria-label="View source on GitHub">
                     <svg width="80" height="80" viewBox="0 0 250 250"
@@ -34,12 +34,32 @@
 </template>
 
 <script>
+    import AdminApi from "@/api/AdminApi"
+
     export default {
         name: "Header",
         data() {
-            return {}
+            return {
+                github: 'https://github.com/zhangruochen77'
+            }
+        },
+        created() {
+
         },
         methods: {
+            /* 获取用户数据 并做缓存 */
+            getInfo() {
+                let adminStr = window.sessionStorage.getItem('admin')
+                if (adminStr !== null && adminStr.length > 0) {
+                    let admin = JSON.parse(adminStr)
+                    this.github = admin.github
+                } else {
+                    AdminApi.getInfo().then(resp => {
+                        this.github = resp.data.github
+                        window.sessionStorage.setItem("admin", JSON.stringify(resp.data))
+                    })
+                }
+            },
             /* 更新路径 根据指定路径进行跳转操作 */
             updatePath(path) {
                 this.$router.replace(path)

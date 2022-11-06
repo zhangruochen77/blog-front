@@ -2,11 +2,11 @@
     <div>
         <div class="about-img-class"></div>
         <div class="about-info-class">
-            <h1>哈喽,我是ruo chen</h1>
+            <h1>哈喽,我是{{admin.name}}</h1>
             <p>
-                目前是一名大三在读的 java 学习者,很高兴你能来参观我的博客,如果你对我的博客内容有感兴趣的地方和意见都可以通过邮箱或者是评论与我联系
+                {{admin.description}}
             </p>
-            <p>个人邮箱: <b>924945268@qq.com</b></p>
+            <p>个人邮箱: <b>{{admin.email}}</b></p>
             <div class="about-to-comment-class">
                 <p>comment</p>
             </div>
@@ -15,8 +15,38 @@
 </template>
 
 <script>
+    import AdminApi from "@/api/AdminApi"
+
     export default {
-        name: "About"
+        name: "About",
+        data() {
+            return {
+                admin: {
+                    id: '1',
+                    username: 'ruoChen',
+                    name: '张若尘',
+                    description: '目前是一名大三在读的 java 学习者,很高兴你能来参观我的博客,如果你对我的博客内容有感兴趣的地方和意见都可以通过邮箱或者是评论与我联系',
+                    email: '924945268@qq.com',
+                    birth: '2002-03-15'
+                }
+            }
+        },
+        created() {
+            this.getInfo()
+        },
+        methods: {
+            getInfo() {
+                let adminStr = window.sessionStorage.getItem('admin')
+                if (adminStr !== null && adminStr.length > 0) {
+                    this.admin = JSON.parse(adminStr)
+                } else {
+                    AdminApi.getInfo().then(resp => {
+                        this.admin = resp.data
+                        window.sessionStorage.setItem("admin", JSON.stringify(resp.data))
+                    })
+                }
+            }
+        }
     }
 </script>
 
