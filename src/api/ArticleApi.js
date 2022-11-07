@@ -12,9 +12,8 @@ export default {
             })
         } else {
             return service({
-                url: `${base}/page/${page}/${limit}`,
-                method: 'post',
-                data: tagId
+                url: `${base}/page/${page}/${limit}/${tagId}`,
+                method: 'post'
             })
         }
     },
@@ -32,6 +31,14 @@ export default {
         return service({
             url: `${base}/${id}`,
             method: 'put'
+        })
+    },
+
+    /* 指定标签下查找三条同类型文章 */
+    pageArticleByTagId(id, tagId) {
+        return service({
+            url: `${base}/byTag/${id}/${tagId}`,
+            method: 'get'
         })
     }
 

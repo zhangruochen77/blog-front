@@ -1,5 +1,21 @@
 <template>
     <div>
+        <el-backtop :bottom="60">
+            <div
+                    style="{
+                        height: 100%;
+                        width: 100%;
+                        background-color: #a6eaff;
+                        box-shadow: 0 0 6px rgba(0,0,0, .12);
+                        border-radius: 20px;
+                        text-align: center;
+                        line-height: 40px;
+                        color: #2ec4b6;
+                      }">
+                <i class="el-icon-top"></i>
+            </div>
+        </el-backtop>
+
         <div class="article-detail-header-class">
             <img :src="article.img">
         </div>
@@ -63,6 +79,43 @@
                 </el-drawer>
             </div>
         </div>
+
+        <div class="article-body-class">
+            <div class="article-box-body-class">
+                <div class="article-box-class" v-for="item in pageArticles">
+                    <div>
+                        <div class="article-img-class">
+                            <img :src="item.img">
+                        </div>
+                        <div class="article-info-class">
+                            <div class="article-tag-class">
+                                <div>
+                                    <p @click="changeTag(item.tagId)">
+                                        {{item.tagValue}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="article-title-class" @click="showArticle(item.id)">
+                                <div>
+                                    <h3>{{item.title}}</h3>
+                                </div>
+                                <div class="article-des-class">
+                                    <p>
+                                        {{item.description}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="article-footer-class">
+                                <p>
+                                    {{item.createTime}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -88,7 +141,8 @@
                 },
                 showLike: true,
                 drawer: false, /* 是否打开抽屉 */
-                userComment: '' /* 用户的评论 */
+                userComment: '', /* 用户的评论 */
+                pageArticles: []
             }
         },
         created() {
@@ -96,6 +150,22 @@
             this.article.id = this.$route.params.id
             this.getArticle(this.article.id)
         }, methods: {
+            /* 查看指定的文章 */
+            showArticle(id) {
+                this.getArticle(id)
+                document.body.scrollTop = document.documentElement.scrollTop = 0
+            },
+            /* 查看指定标签的文章 */
+            changeTag(tagId) {
+                let path = '/article/' + tagId
+                this.$router.push(path)
+            },
+            /* 获取指定同标签的多个列表 */
+            pageArticlesByTag(id, tagId) {
+                ArticleApi.pageArticleByTagId(id, tagId).then(resp => {
+                    this.pageArticles = resp.data
+                })
+            },
             /* 获取评论列表 */
             listComments(id) {
                 ArticleCommentApi.listComments(id).then(resp => {
@@ -106,11 +176,13 @@
             submitComment() {
                 if (this.userComment === null || this.userComment === '') {
                     this.$message.info('胡66是不是有首歌叫《空空如也》😉')
+                    return
                 }
                 if (this.userComment.length > 200) {
                     this.$message.info('评论太长了,我的内存都快溢出了😉')
+                    return
                 }
-                console.log(this.userComment)
+
                 ArticleCommentApi.saveArticleComment(this.article.id, this.userComment).then(resp => {
                     this.$message.info(resp.msg)
                     ArticleCommentApi.listComments(this.article.id).then(resp => {
@@ -133,6 +205,7 @@
             getArticle(id) {
                 ArticleApi.getArticle(id).then(resp => {
                     this.article = resp.data
+                    this.pageArticlesByTag(id, this.article.tagId)
                 })
             }
         }
@@ -218,5 +291,136 @@
         background-color: #292c34;
         color: #abb2bf;
         font-size: 16px;
+    }
+
+
+    .article-body-class {
+        width: 100%;
+        height: 100%;
+        margin-top: 15px;
+        clear: both;
+    }
+
+    .article-box-body-class {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        box-sizing: border-box;
+        flex-wrap: wrap;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .article-box-class {
+        height: 540px;
+        width: 390px;
+        margin-top: 30px;
+        padding: 20px;
+    }
+
+    .article-box-class > div {
+        border-radius: 5px;
+        height: 540px;
+        width: 350px;
+        margin-top: 20px;
+        box-shadow: #ffffff 0 0 0 0;
+        transition: margin-top 400ms, box-shadow 400ms;
+    }
+
+    .article-box-class > div:hover {
+        margin-top: 10px;
+        box-shadow: 0 5px 5px #ebeef5;
+        transition: margin-top 400ms, box-shadow 400ms;
+    }
+
+    .article-img-class {
+        height: 250px;
+        width: 350px;
+        overflow: hidden;
+    }
+
+    .article-img-class:hover {
+        cursor: pointer;
+    }
+
+    .article-box-class > div > div > img {
+        border-radius: 10px 10px 0 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .article-tag-class {
+        height: 40px;
+        width: 100%;
+        position: relative;
+    }
+
+    .article-info-class {
+        border-left: 1px solid #ebeef5;
+        border-right: 1px solid #ebeef5;
+        border-bottom: 1px solid #ebeef5;
+        width: 348px;
+        height: 290px;
+        border-radius: 0 0 8px 8px;
+    }
+
+    .article-tag-class > div {
+        height: 25px;
+        width: 100%;
+    }
+
+    .article-tag-class > div {
+        cursor: pointer;
+    }
+
+    .article-tag-class > div > p {
+        background-color: #2ec4b6;
+        display: inline-block;
+        border-radius: 15px;
+        padding: 2px 12px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    .article-title-class {
+        height: 180px;
+        width: 348px;
+    }
+
+    .article-title-class:hover {
+        cursor: pointer;
+    }
+
+    .article-title-class > div {
+        width: 80%;
+        height: 42px;
+        margin: 0 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .article-title-class > div > h3 {
+        height: 30px;
+        margin: 0 auto;
+        display: block;
+        font-size: 1.17em;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .article-title-class .article-des-class {
+        width: 80%;
+        height: 78px;
+        margin: 0 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #303133;
     }
 </style>

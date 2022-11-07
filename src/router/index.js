@@ -4,7 +4,6 @@ import Main from "@/views/Main"
 import Home from "@/components/Home"
 import About from "@/components/About"
 import Comment from "@/components/Comment"
-import Life from "@/components/Life"
 import Article from "@/components/Article"
 import ArticleDetail from "@/components/ArticleDetail";
 
@@ -31,7 +30,7 @@ const routes = [
             },
             {
                 /* 文章信息 */
-                path: 'article',
+                path: 'article/:tagId',
                 name: 'article',
                 component: Article
             },
@@ -40,12 +39,6 @@ const routes = [
                 path: 'comment',
                 name: 'comment',
                 component: Comment
-            },
-            {
-                /* 个人生活数据信息 */
-                path: 'life',
-                name: 'life',
-                component: Life
             },
             {
                 /* 文章详情界面 */

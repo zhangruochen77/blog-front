@@ -1,5 +1,21 @@
 <template>
     <div>
+
+        <el-backtop :bottom="60">
+            <div
+                    style="{
+                        height: 100%;
+                        width: 100%;
+                        background-color: #a6eaff;
+                        box-shadow: 0 0 6px rgba(0,0,0, .12);
+                        border-radius: 20px;
+                        text-align: center;
+                        line-height: 40px;
+                        color: #2ec4b6;
+                      }">
+                <i class="el-icon-top"></i>
+            </div>
+        </el-backtop>
         <div class="article-header-class">
             <p class="article-total-class">100 articles waiting for you</p>
             <p class="article-view-class">total: {{admin.totalView}} today: {{admin.todayView}}</p>
@@ -16,7 +32,7 @@
                         <div class="article-info-class">
                             <div class="article-tag-class">
                                 <div>
-                                    <p>
+                                    <p @click="changeTag(item.tagId)">
                                         {{item.tagValue}}
                                     </p>
                                 </div>
@@ -45,8 +61,17 @@
                 <div class="block">
                     <el-pagination
                             layout="prev, pager, next"
-                            :total="pageArticles.total">
+                            :total="pageArticles.total"
+                            @current-change="changePage">
                     </el-pagination>
+                </div>
+                <div>
+                    <div class="tag-box-class">
+                        <el-tag type="success" class="tag-class"
+                                v-for="tag in tags" @click="changeTag(tag.id)">
+                            {{tag.value}}
+                        </el-tag>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,6 +82,7 @@
 <script>
     import AdminApi from "@/api/AdminApi"
     import ArticleApi from "@/api/ArticleApi"
+    import TagApi from "@/api/TagApi";
 
     export default {
         name: "Article",
@@ -75,21 +101,48 @@
                 pageArticles: {
                     articles: [], /* 文章列表 */
                     total: 0
-                }
+                },
+                tags: [], /* 标签列表 */
+                tagId: null
             }
         },
         created() {
+            let tagId = this.$route.params.tagId;
             this.getInfo()
-            this.pageListArticles(1, null)
+            if (tagId == 0) {
+                this.pageListArticles(1, null)
+            } else {
+                this.pageListArticles(1, tagId)
+            }
+            this.getTags()
         },
         methods: {
+            /* 更改 tag */
+            changeTag(id) {
+                this.tagId = id
+                this.pageListArticles(1, id)
+            },
+            /* 获取所有标签信息 */
+            getTags() {
+                TagApi.getTags().then(resp => {
+                    this.tags = []
+                    this.tags.push({id: null, value: '全部'})
+                    resp.data.forEach(t => {
+                        this.tags.push(t)
+                    })
+                })
+            },
+            /* 页码发生改变 */
+            changePage(page) {
+                this.pageListArticles(page, null)
+            },
             /* 展示文章信息 */
             showArticle(id) {
                 let path = '/articleDetail/' + id
                 this.$router.push(path)
             },
             /* 分页获取文章列表信息 */
-            pageListArticles(page = 1, tagId) {
+            pageListArticles(page = 1, tagId = null) {
                 ArticleApi.pageListArticles(page, 9, tagId).then(resp => {
                     this.pageArticles.articles = resp.data.records
                     this.pageArticles.total = resp.data.total
@@ -287,10 +340,21 @@
     }
 
     .article-page-class {
-        margin-top: 15px;
+        margin: 15px auto;
         height: 40px;
-        width: 100%;
+        width: 70%;
     }
 
+    .tag-box-class {
+        text-align: left;
+    }
+
+    .tag-class {
+        margin-left: 30px;
+    }
+
+    .tag-class:hover {
+        cursor: pointer;
+    }
 
 </style>

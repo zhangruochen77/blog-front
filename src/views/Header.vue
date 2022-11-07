@@ -5,17 +5,11 @@
                 <img src="../assets/header/header_icon.jpg" style="height: 50px; width: 50px;">
             </div>
             <div class="nav-class" @click="updatePath('/home')">Home</div>
-            <div class="nav-class" @click="updatePath('/article')">Article</div>
-            <div class="nav-class" @click="updatePath('/life')">Life</div>
+            <div class="nav-class" @click="updatePath('/article/0')">Article</div>
             <div class="nav-class" @click="updatePath('/about')">About</div>
             <div class="nav-comment-class" @click="updatePath('/comment')" title="comment">
                 <img src="../assets/header/comment_icon.png" alt="评论">
             </div>
-            <!--            <div>-->
-            <!--                <audio autoplay controls loop>-->
-            <!--                    <source src="../assets/music/space-x.mp3" type='audio/ogg'>-->
-            <!--                </audio>-->
-            <!--            </div>-->
             <div title="github">
                 <a href="https://github.com/zhangruochen77" class="github-corner" aria-label="View source on GitHub">
                     <svg width="80" height="80" viewBox="0 0 250 250"

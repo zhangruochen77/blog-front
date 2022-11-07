@@ -8,7 +8,7 @@
             </p>
             <p>个人邮箱: <b>{{admin.email}}</b></p>
             <div class="about-to-comment-class">
-                <p>comment</p>
+                <p @click="toComment">comment</p>
             </div>
         </div>
     </div>
@@ -35,6 +35,12 @@
             this.getInfo()
         },
         methods: {
+            /* 到评论界面 */
+            toComment() {
+                let path = '/comment'
+                this.$router.push(path)
+            },
+            /* 获取用户信息 */
             getInfo() {
                 let adminStr = window.sessionStorage.getItem('admin')
                 if (adminStr !== null && adminStr.length > 0) {
