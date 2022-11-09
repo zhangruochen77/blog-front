@@ -4,7 +4,6 @@
             <Header></Header>
         </div>
         <div>
-<!--            <ArticleDetail></ArticleDetail>-->
             <!-- 默认根路径也是展示 home -->
             <div v-if="this.$route.path === '/'">
                 <Home></Home>
