@@ -83,6 +83,7 @@
     import AdminApi from "@/api/AdminApi"
     import ArticleApi from "@/api/ArticleApi"
     import TagApi from "@/api/TagApi";
+    import {Loading} from 'element-ui'
 
     export default {
         name: "Article",
@@ -107,6 +108,13 @@
             }
         },
         created() {
+            const Loading = this.$loading({
+                lock: true,
+                text: 'Loading',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+            })
+
             let tagId = this.$route.params.tagId;
             this.getInfo()
             if (tagId == 0) {
@@ -115,6 +123,8 @@
                 this.pageListArticles(1, tagId)
             }
             this.getTags()
+
+            Loading.close()
         },
         methods: {
             /* 更改 tag */

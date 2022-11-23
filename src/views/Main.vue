@@ -44,7 +44,8 @@
 
 <style scoped>
     .header-class {
-        height: 80px;
+        /*height: 80px;*/
         width: 100%;
     }
+
 </style>

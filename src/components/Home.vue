@@ -6,8 +6,26 @@
 </template>
 
 <script>
+
+    import {Loading} from 'element-ui'
+
     export default {
-        name: "Home"
+        name: "Home",
+        data() {
+            return {
+
+            }
+        },
+        created() {
+            const Loading = this.$loading({
+                lock: true,
+                text: 'Loading',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+            })
+
+            Loading.close()
+        }
     }
 </script>
 
@@ -16,33 +34,32 @@
         height: 800px;
         width: 100%;
         background: url("../assets/home/dark.jpg") no-repeat center center;
-        animation: frams 30s infinite; /* 调用图片轮换 */
         clear: both;
     }
 
-    /* 图片轮换 */
-    @keyframes frams {
-        0% {
-            background-image: url("../assets/home/dark.jpg");
-            background-size: 100% 100%;
-            background-repeat: no-repeat
-        }
-        25% {
-            background-image: url("../assets/home/boat-girl.jpg");
-            background-size: 100% 100%;
-            background-repeat: no-repeat
-        }
-        50% {
-            background-image: url("../assets/home/car-girl.jpg");
-            background-size: 100% 100%;
-            background-repeat: no-repeat
-        }
-        75% {
-            background-image: url("../assets/home/sun-girl.jpg");
-            background-size: 100% 100%;
-            background-repeat: no-repeat
-        }
-    }
+    /*!*图片轮换 *!*/
+    /*@keyframes frams {*/
+    /*    0% {*/
+    /*        background-image: url("../assets/home/dark.jpg");*/
+    /*        background-size: 100% 100%;*/
+    /*        background-repeat: no-repeat*/
+    /*    }*/
+    /*    25% {*/
+    /*        background-image: url("../assets/home/boat-girl.jpg");*/
+    /*        background-size: 100% 100%;*/
+    /*        background-repeat: no-repeat*/
+    /*    }*/
+    /*    50% {*/
+    /*        background-image: url("../assets/home/car-girl.jpg");*/
+    /*        background-size: 100% 100%;*/
+    /*        background-repeat: no-repeat*/
+    /*    }*/
+    /*    75% {*/
+    /*        background-image: url("../assets/home/sun-girl.jpg");*/
+    /*        background-size: 100% 100%;*/
+    /*        background-repeat: no-repeat*/
+    /*    }*/
+    /*}*/
 
     .name-class {
         width: 10%;
@@ -75,7 +92,53 @@
         font-weight: bold;
         position: absolute;
         left: 45%;
-        top: 40%;
+        top: 80%;
         color: #faf9f9;
     }
+
+
+    .loadingTwo {
+        width: 150px;
+        height: 4px;
+        border-radius: 2px;
+        margin: 0 auto;
+        margin-top: 100px;
+        position: relative;
+        background: lightgreen;
+        -webkit-animation: changeBgColor 1.04s ease-in infinite alternate;
+        animation: changeBgColor 1.04s ease-in infinite alternate;
+    }
+
+    .loadingTwo span {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: lightgreen;
+        position: absolute;
+        margin-top: -7px;
+        margin-left: -8px;
+        -webkit-animation: changePosition 1.04s ease-in infinite alternate;
+        animation: changePosition 1.04s ease-in infinite alternate;
+    }
+
+    @-webkit-keyframes changeBgColor {
+        0% {
+            background: lightgreen;
+        }
+        100% {
+            background: lightblue;
+        }
+    }
+
+    @-webkit-keyframes changePosition {
+        0% {
+            background: lightgreen;
+        }
+        100% {
+            margin-left: 142px;
+            background: lightblue;
+        }
+    }
+
 </style>

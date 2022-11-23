@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="life-header-class">
-            <img src="../assets/article/fire.jpg">
+            <img src="../assets/home/rabbit.jpg">
         </div>
         <div class="life-comment-body-class">
             <div class="life-detail-comment-class">
@@ -36,6 +36,7 @@
 
 <script>
     import CommentApi from "@/api/CommentApi"
+    import {Loading} from 'element-ui'
 
     export default {
         name: "Comment",
@@ -47,6 +48,13 @@
             }
         },
         created() {
+            const Loading = this.$loading({
+                lock: true,
+                text: 'Loading',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+            })
+
             this.getComments()
             let timeStr = window.sessionStorage.getItem('time')
             if (timeStr !== null) {
@@ -56,6 +64,8 @@
                     window.sessionStorage.setItem('time', JSON.stringify(this.time))
                 }, 120000)
             }
+
+            Loading.close()
         }, methods: {
             /* 提交评论 */
             submitComment() {
@@ -109,7 +119,8 @@
 
     .life-comment-body-class {
         margin: 20px auto;
-        width: 60%;
+        width: 95%;
+        max-width: 600px;
     }
 
     .life-detail-comment-class {

@@ -8,7 +8,7 @@
             </p>
             <p>个人邮箱: <b>{{admin.email}}</b></p>
             <div class="about-to-comment-class">
-                <p @click="toComment">comment</p>
+                <el-button type="primary" @click="toComment" round>comment</el-button>
             </div>
         </div>
     </div>
@@ -16,6 +16,7 @@
 
 <script>
     import AdminApi from "@/api/AdminApi"
+    import {Loading} from 'element-ui'
 
     export default {
         name: "About",
@@ -32,7 +33,16 @@
             }
         },
         created() {
+            const Loading = this.$loading({
+                lock: true,
+                text: 'Loading',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+            })
+
             this.getInfo()
+
+            Loading.close()
         },
         methods: {
             /* 到评论界面 */
@@ -61,8 +71,8 @@
         border-radius: 10px;
         margin: 0 auto;
         height: 600px;
-        width: 75%;
-        background: url("../assets/home/fire.jpg") no-repeat center center;
+        width: 90%;
+        background: url("../assets/home/moto-car.jpg") no-repeat center center;
         clear: both;
         box-shadow: #111111 0 0 0 0;
         transition: box-shadow 500ms;
@@ -76,32 +86,13 @@
 
     .about-info-class {
         margin: 0 auto;
-        height: 200px;
+        /*height: 200px;*/
+        max-height: 500px;
         width: 75%;
     }
 
     .about-to-comment-class {
-        position: absolute;
-        left: 46%;
         height: 40px;
-        width: 8%;
-        border-radius: 5px;
-        color: #ffffff;
-        font-size: 25px;
-        background-color: #614d82;
-        box-shadow: #111111 0 0 0 0;
-        transition: box-shadow 200ms;
-
-    }
-
-    .about-to-comment-class > p {
-        height: 20px;
-        margin: 5px auto;
-    }
-
-    .about-to-comment-class:hover {
-        cursor: pointer;
-        box-shadow: #111111 0 0 10px 3px;
-        transition: box-shadow 200ms;
+        margin: 0 auto;
     }
 </style>

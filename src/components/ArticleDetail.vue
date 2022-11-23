@@ -38,7 +38,7 @@
                         <el-timeline>
                             <el-timeline-item :timestamp="c.createTime" placement="top" v-for="c in article.comments">
                                 <el-card>
-                                    <p>{{c.content}}</p>
+                                    <p>游客:{{c.content}}</p>
                                 </el-card>
                             </el-timeline-item>
                         </el-timeline>
@@ -78,6 +78,13 @@
                     </span>
                 </el-drawer>
             </div>
+        </div>
+
+        <div v-if="pageArticles.length > 0" class="interest-class">
+            猜你会感兴趣 <i class="el-icon-s-management"></i>
+        </div>
+        <div v-else class="interest-class">
+            该文章暂无推荐 <i class="el-icon-s-management"></i>
         </div>
 
         <div class="article-body-class">
@@ -122,6 +129,7 @@
 <script>
     import ArticleApi from "@/api/ArticleApi"
     import ArticleCommentApi from "@/api/ArticleCommentApi"
+    import {Loading} from 'element-ui'
 
     export default {
         name: "ArticleDetail",
@@ -146,9 +154,18 @@
             }
         },
         created() {
+            const Loading = this.$loading({
+                lock: true,
+                text: 'Loading',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+            })
+
             /* 路由当中获取参数 */
             this.article.id = this.$route.params.id
             this.getArticle(this.article.id)
+
+            Loading.close()
         }, methods: {
             /* 查看指定的文章 */
             showArticle(id) {
@@ -228,7 +245,8 @@
 
     .article-detail-info-class {
         margin: 0 auto;
-        width: 50%;
+        width: 95%;
+        max-width: 800px;
     }
 
     .article-detail-title-class {
@@ -266,6 +284,7 @@
     .article-detail-comment-body-class {
         margin: 0 auto;
         width: 50%;
+        min-width: 400px;
     }
 
     .submit-comment-class {
@@ -297,7 +316,7 @@
     .article-body-class {
         width: 100%;
         height: 100%;
-        margin-top: 15px;
+        /*margin-top: 15px;*/
         clear: both;
     }
 
@@ -423,4 +442,10 @@
         text-overflow: ellipsis;
         color: #303133;
     }
+
+    .interest-class {
+        font-size: 20px;
+        font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    }
+
 </style>

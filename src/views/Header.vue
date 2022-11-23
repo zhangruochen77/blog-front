@@ -1,15 +1,24 @@
 <template>
     <div class="header-class">
         <div>
-            <div class="nav-header-class">
-                <img src="../assets/header/header_icon.jpg" style="height: 50px; width: 50px;">
-            </div>
-            <div class="nav-class" @click="updatePath('/home')">Home</div>
-            <div class="nav-class" @click="updatePath('/article/0')">Article</div>
-            <div class="nav-class" @click="updatePath('/about')">About</div>
-            <div class="nav-comment-class" @click="updatePath('/comment')" title="comment">
-                <img src="../assets/header/comment_icon.png" alt="评论">
-            </div>
+
+            <el-menu class="el-menu-demo" mode="horizontal">
+                <el-menu-item index="1" @click="updatePath('/home')">Home</el-menu-item>
+                <el-menu-item index="2" @click="updatePath('/article/0')">Article</el-menu-item>
+                <el-menu-item index="3" @click="updatePath('/about')">About</el-menu-item>
+                <el-menu-item index="4" @click="updatePath('/comment')" title="comment">
+                    <img src="../assets/header/comment_icon.png" alt="评论">
+                </el-menu-item>
+            </el-menu>
+            <!--            <div class="nav-header-class">-->
+            <!--                <img src="../assets/header/header_icon.jpg" style="height: 50px; width: 50px;">-->
+            <!--            </div>-->
+            <!--            <div class="nav-class" @click="updatePath('/home')">Home</div>-->
+            <!--            <div class="nav-class" @click="updatePath('/article/0')">Article</div>-->
+            <!--            <div class="nav-class" @click="updatePath('/about')">About</div>-->
+            <!--            <div class="nav-comment-class" @click="updatePath('/comment')" title="comment">-->
+            <!--                <img src="../assets/header/comment_icon.png" alt="评论">-->
+            <!--            </div>-->
             <div title="github">
                 <a href="https://github.com/zhangruochen77" class="github-corner" aria-label="View source on GitHub">
                     <svg width="80" height="80" viewBox="0 0 250 250"
@@ -65,7 +74,7 @@
 <style scoped>
     .header-class {
         width: 100%;
-        height: 80px;
+        /*height: 80px;*/
         font-size: 20px;
         color: #071f36;
         text-align: center;
